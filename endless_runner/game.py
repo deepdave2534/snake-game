@@ -99,10 +99,15 @@ all_sprites.add(player)
 # Variable to keep the main loop running
 running = True
 
+background = pygame.image.load("images/background.png").convert()
+background = pygame.transform.scale(background, (SCREEN_WIDTH, SCREEN_HEIGHT))
+
 # Main loop
 # Main loop
 while running:
     # for loop through the event queue
+    screen.blit(background, (0, 0))
+
     for event in pygame.event.get():
         # Check for KEYDOWN event
         if event.type == KEYDOWN:
@@ -130,7 +135,7 @@ while running:
     enemies.update()
 
     # Fill the screen with black
-    screen.fill((0, 0, 0))
+    #screen.fill((0, 0, 0))
 
     # Draw all sprites
     for entity in all_sprites:

@@ -28,8 +28,6 @@ class Player(pygame.sprite.Sprite):
         original_image = pygame.image.load("images/jet.png").convert()
         self.surf = pygame.transform.scale(original_image, (75, 50))  # Resize to 75x50
         self.surf.set_colorkey((255, 255, 255), RLEACCEL)
-        #self.surf = pygame.Surface((75, 25))
-        #self.surf.fill((255, 255, 255))
         self.rect = self.surf.get_rect()
 
 # Move the sprite based on user keypresses
@@ -64,8 +62,6 @@ class Enemy(pygame.sprite.Sprite):
         original_image = pygame.image.load("images/missile.png").convert()
         self.surf = pygame.transform.scale(original_image, (75, 50))  # Resize to 75x50
         self.surf.set_colorkey((255, 255, 255), RLEACCEL)
-        #self.surf = pygame.Surface((20, 10))
-        #self.surf.fill((255, 255, 255))
         self.rect = self.surf.get_rect(
             center=(
                 random.randint(SCREEN_WIDTH + 20, SCREEN_WIDTH + 100),

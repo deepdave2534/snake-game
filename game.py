@@ -6,6 +6,7 @@ import random
 # Import pygame.locals for easier access to key coordinates
 # Updated to conform to flake8 and black standards
 from pygame.locals import (
+    RLEACCEL,
     K_UP,
     K_DOWN,
     K_LEFT,
@@ -24,8 +25,11 @@ SCREEN_HEIGHT = 600
 class Player(pygame.sprite.Sprite):
     def __init__(self):
         super(Player, self).__init__()
-        self.surf = pygame.Surface((75, 25))
-        self.surf.fill((255, 255, 255))
+        original_image = pygame.image.load("images/jet.png").convert()
+        self.surf = pygame.transform.scale(original_image, (75, 50))  # Resize to 75x50
+        self.surf.set_colorkey((255, 255, 255), RLEACCEL)
+        #self.surf = pygame.Surface((75, 25))
+        #self.surf.fill((255, 255, 255))
         self.rect = self.surf.get_rect()
 
 # Move the sprite based on user keypresses
@@ -57,15 +61,18 @@ pygame.init()
 class Enemy(pygame.sprite.Sprite):
     def __init__(self):
         super(Enemy, self).__init__()
-        self.surf = pygame.Surface((20, 10))
-        self.surf.fill((255, 255, 255))
+        original_image = pygame.image.load("images/missile.png").convert()
+        self.surf = pygame.transform.scale(original_image, (75, 50))  # Resize to 75x50
+        self.surf.set_colorkey((255, 255, 255), RLEACCEL)
+        #self.surf = pygame.Surface((20, 10))
+        #self.surf.fill((255, 255, 255))
         self.rect = self.surf.get_rect(
             center=(
                 random.randint(SCREEN_WIDTH + 20, SCREEN_WIDTH + 100),
                 random.randint(0, SCREEN_HEIGHT),
             )
         )
-        self.speed = random.randint(5, 20)
+        self.speed = random.uniform(0.5, 1.5)  # Slower speeds using decimals
 
     # Move the sprite based on speed
     # Remove the sprite when it passes the left edge of the screen
